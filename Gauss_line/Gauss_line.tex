@@ -1,0 +1,40 @@
+\documentclass{article}                          %%%定义文档类型
+\usepackage[utf8]{inputenc}
+\usepackage{ctex}                                %%%中文支持
+\usepackage{amsmath}                             %%%数学公式包
+\numberwithin{equation}{subsection}              %%%公式自动编号
+\usepackage{geometry}
+\geometry{left=0.95in,right=0.95in,top=1in,bottom=1in}
+\usepackage{graphicx}                            %%%图片支持
+\usepackage{caption}
+\title{任意二维直线的高斯节点与高斯权重}
+\author{李晓东,中国地质大学（武汉）工程学院}
+
+\begin{document}
+	\maketitle
+	\begin{abstract}
+	本文给出了任意二维直线的高斯节点与高斯权重系数，首先给出了水平和垂直直线上的高斯积分，而后给出了和水平方向夹角小于90度的直线上的高斯积分公式。	
+	\end{abstract}
+
+\section{水平和垂直直线上的高斯积分}
+对于水平或者垂直直线上的高斯积分，直接套用一维任意曲线的高斯积分公式即可:
+\begin{equation}\label{key}
+\int_{a}^{b} f(t) dt= \frac{b-a}{2} \sum_{i=0}^{N} A_i f\left(\frac{b-a}{2} x_i+ \frac{a+b}{2} \right)
+\end{equation}
+只是在程序编写的时候，需要判定一下是水平直线还是垂直直线，而后直接按照其中一个坐标套用上式即可。
+
+\section{和水平方向夹角小于90度的高斯积分公式}
+根据微积分理论：
+\begin{equation}\label{key}
+I=\int_{\Gamma}f(x,y)ds=\int_{a}^{b}f(x,y)\sqrt{1+\left( \frac{dy}{dx}\right) ^2}dx
+\end{equation}
+因为是直线，所以记$ J=\sqrt{1+\left( \frac{dy}{dx}\right) ^2} $,$ J $是定值,所以积分公式变为：
+
+\begin{equation}\label{key}
+I=\frac{b-a}{2} J\sum_{i=0}^{N} A_i f\left(\frac{b-a}{2} x_i+ \frac{a+b}{2} ,y_i \right)
+\end{equation}
+其中：
+\begin{equation}\label{key}
+y_i=y_1+\frac{y_2-y_1}{x_2-x_1} (\frac{b-a}{2} x_i+ \frac{a+b}{2}-x_1)
+\end{equation}
+\end{document}
