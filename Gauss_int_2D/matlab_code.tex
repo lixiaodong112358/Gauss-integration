@@ -1,0 +1,42 @@
+	\begin{verbatim}
+	function result=generate_Gauss_reference_2D_triangle(Gauss_type)
+	%%%%根据一维高斯节点和高斯权重，生成三角形参考单元的高斯节点高斯权重
+	%%%%2021/5/8，李晓东
+	[Gauss_weight,Gauss_nodes]=generate_Gauss_reference_1D(Gauss_type);
+	vector=zeros(Gauss_type*Gauss_type,3);
+	k=1;
+	for i=1:Gauss_type
+	for j=1:Gauss_type
+	vector(k,1)=(1+Gauss_nodes(j))/2;
+	vector(k,2)=(1-Gauss_nodes(j))*(1+Gauss_nodes(i))/4;
+	vector(k,3)=(1-Gauss_nodes(j))/8*Gauss_weight(j)*Gauss_weight(i);
+	k=k+1;
+	end
+	end
+	result=vector;
+	end
+	\end{verbatim}
+	\begin{verbatim}
+	function [Gauss_weight,Gauss_nodes]=generate_Gauss_reference_1D(Gauss_type)
+	%%根据高斯节点数目，返回相应的高斯节点与高斯权重系数
+	if Gauss_type==4
+	Ai=[0.3478548451,0.3478548451,0.6521451549,0.6521451549];
+	xi=[0.8611363116,-0.8611363116,0.3399810436,-0.3399810436];
+	elseif Gauss_type==8
+	Ai=[0.1012285363,0.1012285363,0.2223810345,0.2223810345,...
+	0.3137066459,0.3137066459,0.3626837834,0.3626837834];
+	xi=[0.9602898565,-0.9602898565,0.7966664774,-0.7966664774,...
+	0.5255324099,-0.5255324099,0.1834346425,-0.1834346425];
+	elseif Gauss_type==2
+	Ai=[1,1];
+	xi=[-1/sqrt(3),1/sqrt(3)];
+	elseif Gauss_type==3
+	Ai=[0.555555556,0.555555556,0.88888889];
+	xi=[0.7745966692, -0.7745966692,  0];
+	else
+	warning='高斯点数请在2、3、4、8中选取'
+	end
+	Gauss_weight=Ai;
+	Gauss_nodes=xi;
+	end
+	\end{verbatim}
